@@ -214,41 +214,8 @@ void HandleGameOver(bool &gameOver, bool &player1Won, bool &modeChosen, bool &di
 }
 
 
-void UpdateGameLogic(Vector2 &ballPosition, Vector2 &ballDirection, float &ballSpeed,
-                     int &player1Lives, int &player2Lives, int &player1Score, int &player2Score,
-                     float &player1PaddleY, float &player2PaddleY, bool &gameOver, bool &player1Won)
-{
-    // Ball's movement Handling
-    ballPosition.x += ballDirection.x * ballSpeed * GetFrameTime();
-    ballPosition.y += ballDirection.y * ballSpeed * GetFrameTime();
-
-    // Paddle's movement Handling
-    HandlePaddleMovement(player1PaddleY, player2PaddleY, ballPosition);
-
-    // Collision Handling
-    HandleBallCollision(ballDirection, ballSpeed, player1Score, player2Score, player1PaddleY, player2PaddleY, ballPosition);
-
-    // Checking if the ball goes out of bounds
-    if (ballPosition.x < 0)
-    {
-        player1Lives--;
-        ResetBall(ballPosition, ballDirection, ballSpeed);
-    }
-    else if (ballPosition.x > WIDTH)
-    {
-        player2Lives--;
-        ResetBall(ballPosition, ballDirection, ballSpeed);
-    }
-
-    // Checking for game over
-    if (player1Lives == 0 || player2Lives == 0)
-    {
-        gameOver = true;
-        player1Won = player1Lives > 0;
-    }
-}
-
 // ----------------------- Function Definitions -----------------------
+
 void UpdateGameLogic(Vector2 &ballPosition, Vector2 &ballDirection, float &ballSpeed,
                      int &player1Lives, int &player2Lives, int &player1Score, int &player2Score,
                      float &player1PaddleY, float &player2PaddleY, bool &gameOver, bool &player1Won)
