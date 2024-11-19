@@ -37,9 +37,9 @@ float speedIncrement = 0.0f;
 // ---------------------------- Function Declarations ----------------------------
 
 /////////////////////////////////////////////////  Nishad  //////////////////////////////////////////////
-void HandleModeSelection();
+void HandleModeSelection(bool &modeChosen, bool &difficultyChosen);
 
-void HandleDifficultySelection();
+void HandleDifficultySelection(bool &difficultyChosen, float &botPaddleSpeed, float &speedIncrement);
 
 /////////////////////////////////////////////////  Rahul  //////////////////////////////////////////////
 
@@ -118,6 +118,62 @@ int main()
 
     CloseWindow();
     return 0;
+}
+
+void HandleModeSelection(bool &modeChosen, bool &difficultyChosen)
+{
+    BeginDrawing();
+    ClearBackground(BLACK);
+
+    DrawText("Select Game Mode:", WIDTH / 2 - MeasureText("Select Game Mode:", 40) / 2, HEIGHT / 2 - 60, 40, WHITE);
+    DrawText("1. Player vs Bot", WIDTH / 2 - MeasureText("1. Player vs Bot", 20) / 2, HEIGHT / 2, 20, GREEN);
+    DrawText("2. Player vs Player", WIDTH / 2 - MeasureText("2. Player vs Player", 20) / 2, HEIGHT / 2 + 30, 20, BLUE);
+
+    if (IsKeyPressed(KEY_ONE))
+    {
+        gameMode = PLAYER_VS_BOT;
+        modeChosen = true;
+    }
+    if (IsKeyPressed(KEY_TWO))
+    {
+        gameMode = PLAYER_VS_PLAYER;
+        modeChosen = true;
+        difficultyChosen = true; // Skip difficulty selection for Player vs Player
+    }
+
+    EndDrawing();
+}
+
+void HandleDifficultySelection(bool &difficultyChosen, float &botPaddleSpeed, float &speedIncrement)
+{
+    BeginDrawing();
+    ClearBackground(BLACK);
+
+    DrawText("Select Difficulty:", WIDTH / 2 - MeasureText("Select Difficulty:", 40) / 2, HEIGHT / 2 - 60, 40, WHITE);
+    DrawText("1. Easy", WIDTH / 2 - MeasureText("1. Easy", 20) / 2, HEIGHT / 2, 20, GREEN);
+    DrawText("2. Medium", WIDTH / 2 - MeasureText("2. Medium", 20) / 2, HEIGHT / 2 + 30, 20, YELLOW);
+    DrawText("3. Hard", WIDTH / 2 - MeasureText("3. Hard", 20) / 2, HEIGHT / 2 + 60, 20, RED);
+
+    if (IsKeyPressed(KEY_ONE))
+    {
+        botPaddleSpeed = 2.0f;
+        speedIncrement = 10.0f;
+        difficultyChosen = true;
+    }
+    if (IsKeyPressed(KEY_TWO))
+    {
+        botPaddleSpeed = 3.0f;
+        speedIncrement = 20.0f;
+        difficultyChosen = true;
+    }
+    if (IsKeyPressed(KEY_THREE))
+    {
+        botPaddleSpeed = 4.5f;
+        speedIncrement = 30.0f;
+        difficultyChosen = true;
+    }
+
+    EndDrawing();
 }
 
 void HandleGameOver(bool &gameOver, bool &player1Won, bool &modeChosen, bool &difficultyChosen,
