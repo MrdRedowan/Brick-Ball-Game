@@ -120,6 +120,9 @@ int main()
     return 0;
 }
 
+
+// ------------------------------ Function Definitions --------------------------------
+
 void HandleModeSelection(bool &modeChosen, bool &difficultyChosen)
 {
     BeginDrawing();
@@ -212,9 +215,6 @@ void HandleGameOver(bool &gameOver, bool &player1Won, bool &modeChosen, bool &di
 
     EndDrawing();
 }
-
-
-// ----------------------- Function Definitions -----------------------
 
 void UpdateGameLogic(Vector2 &ballPosition, Vector2 &ballDirection, float &ballSpeed,
                      int &player1Lives, int &player2Lives, int &player1Score, int &player2Score,
